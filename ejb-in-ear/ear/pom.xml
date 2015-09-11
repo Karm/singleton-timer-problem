@@ -53,7 +53,7 @@
     </dependencies>
 
     <build>
-      <finalName>${project.artifactId}</finalName>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <!-- Ear plugin -->
             <plugin>
@@ -68,6 +68,22 @@
                         are in easy way to package any libraries needed in the ear, and automatically 
                         have any modules (EJB-JARs and WARs) use them -->
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <archive>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                        <manifestEntries>
+                            <Dependencies>org.jboss.msc,
+                                org.wildfly.clustering.singleton,
+                                org.jboss.as.server
+                            </Dependencies>
+                        </manifestEntries>
+                    </archive>
+                    <modules>
+                        <ejbModule>
+                            <groupId>org.wildfly.quickstarts</groupId>
+                            <artifactId>wildfly-ejb-in-ear-ejb</artifactId>
+                            <bundleFileName>wildfly-ejb-in-ear-ejb.jar</bundleFileName>
+                        </ejbModule>
+                    </modules>
                 </configuration>
             </plugin>
             <!-- WildFly plugin to deploy ear -->
